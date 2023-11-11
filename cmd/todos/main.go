@@ -1,6 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	todo "todo_cli_app"
+)
+
+const (
+	// hidden file
+	todoFile = ".todos.json"
+)
 
 func main() {
 	fmt.Println("hello, world")
@@ -13,5 +22,13 @@ func main() {
 	// 2. d. Complete todo check
 	// 2. e. invalid commands
 	// 3. to read/ scann the the inputss
+	// 4. Print the todos
+
+	todos := &todo.Todos{}
+	// if error in loading, exit the prrogram
+	if err := todos.Load(todoFile); err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
+		os.Exit(1)
+	}
 
 }
